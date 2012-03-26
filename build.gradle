@@ -1,0 +1,47 @@
+// Project info
+group = "org.primeframework.gradle"
+version = "0.1"
+description = "The Primeframework Tomcat Plugin"
+
+// Plugins
+apply plugin: "groovy"
+apply plugin: "idea"
+apply plugin: "integration"
+apply plugin: "release"
+
+// Build script config
+buildscript {
+  repositories {
+    ivy {
+      name "inversoftPublic"
+      ivyPattern "http://hawking.inversoft.com/repository/public/[organisation]/[module]/[revision]/ivy.xml"
+      artifactPattern "http://hawking.inversoft.com/repository/public/[organisation]/[module]/[revision]/[type]s/[artifact]-[revision].[ext]"
+    }
+    ivy {
+      url "${project.gradle.gradleUserHomeDir}/integration-cache"
+    }
+  }
+  dependencies {
+    classpath(
+      "org.primeframework.gradle:gradle-integration-plugin:0.1",
+      "org.primeframework.gradle:gradle-release-plugin:0.2",
+    )
+  }
+}
+
+// Dependencies
+repositories {
+  ivy {
+    name "inversoftPublic"
+    ivyPattern "http://hawking.inversoft.com/repository/public/[organisation]/[module]/[revision]/ivy.xml"
+    artifactPattern "http://hawking.inversoft.com/repository/public/[organisation]/[module]/[revision]/[type]s/[artifact]-[revision].[ext]"
+  }
+}
+
+dependencies {
+  compile gradleApi()
+  groovy localGroovy()
+  runtime "commons-io:commons-io:2.1"
+}
+
+sourceCompatibility = 1.6
