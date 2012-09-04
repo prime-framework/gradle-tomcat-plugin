@@ -75,7 +75,13 @@ class TomcatPlugin implements Plugin<Project> {
         }
       }
 
-//      Runtime.getRuntime().exec("build/tomcat/bin/tomcat.sh run");
+      // finally, copy the logging.properties file into WEB-INF/classes
+      project.copy {
+        from("src/main/resources") {
+          include "logging.properties"
+        }
+        into "web/WEB-INF/classes"
+      }
     }
   }
 
