@@ -78,7 +78,8 @@ class TomcatPlugin implements Plugin<Project> {
       // finally, copy the logging.properties file into WEB-INF/classes
       project.copy {
         from("src/main/resources") {
-          include "logging.properties"
+          include "logback.xml"
+          include "logging.properties" //search-engine is still on jdk14 style logging
         }
         into "web/WEB-INF/classes"
       }
